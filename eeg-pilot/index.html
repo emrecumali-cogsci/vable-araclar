@@ -76,6 +76,20 @@ input[type=range]{width:100%;accent-color:var(--magenta)}
 .notes h4{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--fg);margin:0 0 6px;font-weight:600}
 .notes p{margin:0}
 footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--line);font-family:var(--mono);font-size:12px;color:var(--dim)}
+@media (max-width:600px){
+  header.hero{padding-block:24px 12px;gap:16px}
+  section{padding-block:36px 4px}
+  .sub{margin-bottom:16px}
+  .stat{padding:12px 10px}
+  #topo{max-width:300px}
+  #spec{height:200px}
+  .compare{gap:14px}
+  .compare canvas.mini,#psd{max-width:230px}
+  .notes{gap:14px}
+  footer{margin-top:32px}
+  .brandbar{padding-top:18px}
+  .brandbar img{width:88px}
+}
 @media (max-width:860px){.player{grid-template-columns:minmax(0,1fr)}.compare,.notes{grid-template-columns:minmax(0,1fr)}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
 
 </style>
@@ -204,11 +218,11 @@ function topoField(vals,vmax=0.45){
   }
   return img;
 }
-const off=document.createElement('canvas');off.width=off.height=GRID;
+const offs=new WeakMap();function offFor(cv){let o=offs.get(cv);if(!o){o=document.createElement('canvas');o.width=o.height=GRID;offs.set(cv,o)}return o}
 function drawTopo(cv,vals,opts={}){
   const [x,W,H]=fit(cv);x.clearRect(0,0,W,H);
   const R=Math.min(W,H)*.40, cx=W/2, cy=H/2+R*.04;
-  off.getContext('2d').putImageData(topoField(vals,opts.vmax||0.45),0,0);
+  const off=offFor(cv);off.getContext('2d').putImageData(topoField(vals,opts.vmax||0.45),0,0);
   x.save();x.shadowColor='rgba(224,79,180,.35)';x.shadowBlur=opts.small?16:36;
   x.beginPath();x.arc(cx,cy,R,0,Math.PI*2);x.fillStyle='#15123a';x.fill();x.restore();
   x.save();x.beginPath();x.arc(cx,cy,R,0,Math.PI*2);x.clip();x.imageSmoothingEnabled=true;x.imageSmoothingQuality='high';
