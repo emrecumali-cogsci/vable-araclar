@@ -197,6 +197,17 @@ html.embedded .orb .ring,html.embedded .orb .cap{display:none}
 html.embedded nav.rail{position:static;background:none}
 html.embedded .scroller{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
 html.embedded .fullscreen-link{display:inline}
+/* tabs: wrap on mouse devices (no swipe), swipe with edge fade on touch */
+@media (hover:hover) and (pointer:fine){.tablist{flex-wrap:wrap;overflow:visible}}
+@media (pointer:coarse){.tablist{-webkit-mask-image:linear-gradient(90deg,#000 88%,transparent);mask-image:linear-gradient(90deg,#000 88%,transparent);padding-right:40px}}
+/* embedded: keep the header to two short lines so the lesson gets the room */
+html.embedded .eyebrow,html.embedded .orb,html.embedded .lede [data-i=lede]{display:none}
+html.embedded .hero{grid-template-columns:minmax(0,1fr);padding-top:4px}
+html.embedded .hero>div:first-child{display:flex;align-items:baseline;gap:1rem;flex-wrap:wrap}
+html.embedded h1{font-size:clamp(1.5rem,3.2vw,2rem);margin:0}
+html.embedded .lede{margin:0;font-size:.85rem}
+html.embedded nav.rail{margin-top:4px;padding-block:8px 10px}
+html.embedded .bar{padding-block:8px}
 @media (max-width:600px){html.embedded .hero{grid-template-columns:minmax(0,1fr)} html.embedded .orb{display:none}}
 @media (prefers-reduced-motion:reduce){.meter i{transition:none}}
 </style>
