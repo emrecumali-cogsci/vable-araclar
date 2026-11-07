@@ -581,7 +581,7 @@ const T = {
   fmt_mb:"Sütunlar: <code>vaka</code>, <code>evre</code> (A/B), <code>oturum</code>, <code>değer</code>. Her vaka için bir başlama (A) ve bir müdahale (B) evresi beklenir.",
   fmt_atd:"Sütunlar: <code>vaka</code> (isteğe bağlı), <code>evre</code> (isteğe bağlı; başlama düzeyi A), <code>oturum</code>, <code>koşul</code>, <code>değer</code>. Dönüşümlü evrede her satır bir koşula aittir.",
   fmt_cc:"Sütunlar: <code>vaka</code> (isteğe bağlı), <code>evre</code> (A, B1, B2…), <code>oturum</code>, <code>ölçüt</code>, <code>değer</code>. Ölçüt, o alt evrede hedeflenen düzeydir.",
-  example_note:"Örnek veriler uydurmadır; gerçek bir çalışmaya ait değildir.",
+  example_note:"Örnek veriler, aracın işleyişini göstermek amacıyla benzetimle (simülasyon) üretilmiştir; herhangi bir araştırmadan elde edilmemiştir.",
   rows_ok:(n,c)=>`${n} satır, ${c} vaka okundu.`,
   e_cols:"En az <code>evre</code> ve <code>değer</code> sütunları gerekli.",e_cond:"Dönüşümlü uygulamalar için <code>koşul</code> sütunu gerekli.",e_crit:"Değişen ölçüt deseni için <code>ölçüt</code> sütunu gerekli.",
   e_empty:"Analiz için veri yapıştırın ya da örnek veri yükleyin.",e_nocomp:"Karşılaştırılacak A→B evre çifti bulunamadı.",
@@ -621,7 +621,7 @@ const T = {
   fmt_mb:"Columns: <code>case</code>, <code>phase</code> (A/B), <code>session</code>, <code>outcome</code>. Each case needs one baseline (A) and one intervention (B) phase.",
   fmt_atd:"Columns: <code>case</code> (optional), <code>phase</code> (optional; baseline A), <code>session</code>, <code>condition</code>, <code>outcome</code>. In the alternating phase each row belongs to one condition.",
   fmt_cc:"Columns: <code>case</code> (optional), <code>phase</code> (A, B1, B2…), <code>session</code>, <code>criterion</code>, <code>outcome</code>. The criterion is the target level for that sub-phase.",
-  example_note:"Example data are invented and do not come from any study.",
+  example_note:"The example data were simulated to demonstrate the tool; they were not collected in any study.",
   rows_ok:(n,c)=>`Read ${n} rows, ${c} case${c>1?"s":""}.`,
   e_cols:"At least <code>phase</code> and <code>outcome</code> columns are required.",e_cond:"Alternating treatments need a <code>condition</code> column.",e_crit:"Changing criterion designs need a <code>criterion</code> column.",
   e_empty:"Paste data or load the example to start.",e_nocomp:"No A→B phase pair found to compare.",
@@ -652,7 +652,7 @@ function fmt(x, d = 2, noLead = false) {
 const pct = (x, d = 0) => !isFinite(x) ? "–" : (lang === "tr" ? "%" + fmt(x * 100, d) : fmt(x * 100, d) + "%");
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 
-/* ---------------- örnek veriler (uydurma; sabit tohum) ---------------- */
+/* ---------------- örnek veriler (benzetim; sabit tohum) ---------------- */
 function rng(seed) { return function () { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
 function pois(r, lam) { let L = Math.exp(-lam), k = 0, p = 1; do { k++; p *= r(); } while (p > L); return k - 1; }
 function example(d) {
