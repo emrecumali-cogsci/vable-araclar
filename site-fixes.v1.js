@@ -1,3 +1,7 @@
+/* Loader: the CMS integration field has a length limit, so the site refresh is loaded from here. */
+(function(){if(location.hostname!=='vable.erdogan.edu.tr'||/^\/CP(?:\/|$)/i.test(location.pathname))return;
+if(document.querySelector('script[src*="website-refresh.v1.js"]'))return;
+var s=document.createElement('script');s.src='https://emrecumali-cogsci.github.io/vable-araclar/website-refresh.v1.js?v=3';s.defer=true;(document.head||document.documentElement).appendChild(s);})();
 /* V-Able menu fix v1. Only applies to vable.erdogan.edu.tr. */
 (function(){'use strict';
 if(location.hostname!=='vable.erdogan.edu.tr'||/^\/CP(?:\/|$)/i.test(location.pathname))return;
