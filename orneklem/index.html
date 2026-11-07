@@ -515,7 +515,13 @@ function setLang(l){
   update();
 }
 $("lang-tr").addEventListener("click",()=>setLang("tr")); $("lang-en").addEventListener("click",()=>setLang("en"));
-let start="tr"; try{ if(location.hash==="#en") start="en"; else start=localStorage.getItem("vable-lang")||"tr"; }catch(e){}
+// An explicit page language takes precedence over a saved tool preference.
+let start="tr";
+const requestedLanguage=new URLSearchParams(location.search).get("lang");
+if(requestedLanguage==="tr"||requestedLanguage==="en") start=requestedLanguage;
+else if(location.hash==="#en") start="en";
+else if(location.hash==="#tr") start="tr";
+else {try{const savedLanguage=localStorage.getItem("vable-lang");if(savedLanguage==="tr"||savedLanguage==="en") start=savedLanguage;}catch(e){}}
 layout(); setLang(start);
 </script>
 
