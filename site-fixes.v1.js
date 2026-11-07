@@ -3,7 +3,7 @@
 if(location.hostname!=='vable.erdogan.edu.tr'||/^\/CP(?:\/|$)/i.test(location.pathname))return;
 function install(){
 var menu=document.getElementById('dikey-menu');if(!menu)return;
-if(menu.classList.contains('vable-menu-fixed')){sync();return;}
+if(menu.classList.contains('vable-menu-fixed')){Array.from(menu.querySelectorAll('li.menu-ust-hedef')).forEach(function(item){var a=item.querySelector('a');if(a&&Array.from(item.parentElement.children).some(function(other){var b=other.querySelector('a');return other!==item&&b&&b.href===a.href;}))item.remove();});sync();return;}
 var groups=Array.from(menu.children).filter(function(li){return li.querySelector(':scope > a.has-sub')&&li.querySelector(':scope > ul.sub-menu');});
 var initiallyOpen=groups.find(function(li){return li.querySelector(':scope > a.has-sub').getAttribute('aria-expanded')==='true';});
 if(!document.getElementById('vable-menu-fix-style')){var style=document.createElement('style');style.id='vable-menu-fix-style';style.textContent='#dikey-menu.vable-menu-fixed > li > ul.sub-menu{display:none!important}#dikey-menu.vable-menu-fixed > li.vable-menu-open > ul.sub-menu{display:block!important}';document.head.appendChild(style);}
