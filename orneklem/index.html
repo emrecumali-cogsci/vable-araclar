@@ -1,52 +1,44 @@
 <!doctype html>
-<html lang="tr">
+<html lang="tr" data-theme="dark">
 <head>
 <meta charset="utf-8">
-<script>try{if(window.self!==window.top)document.documentElement.setAttribute("data-theme","light")}catch(e){document.documentElement.setAttribute("data-theme","light")}</script>
 <meta name="description" content="V-Able Bilişsel Bilimler Laboratuvarı örneklem büyüklüğü hesaplayıcısı (Zhang ve Hartmann, 2023).">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>V-Able Örneklem Hesaplayıcı</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Source+Sans+3:wght@400;600&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap">
 <style>
 /* Layout: lab-instrument panel — inputs on the left, a live readout on the right, method notes below. */
 :root{
-  --bg:#f3f7fa; --surface:#ffffff; --sunk:#e8f0f5; --line:#d3e0ea;
-  --fg:#0d2440; --muted:#53687f;
-  --navy:#0b386e; --blue:#0e6ebb; --teal:#1f9e9a; --mint:#6ed3d1;
-  --accent:var(--blue); --accent-ink:#ffffff; --readout:#0b386e; --readout-fg:#ffffff; --readout-muted:#a9c7e3;
-  --warn:#b25d00;
-  --f-display:"Poppins",system-ui,sans-serif;
-  --f-body:"Source Sans 3","Segoe UI",system-ui,sans-serif;
-  --f-num:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  color-scheme:dark;
+  /* Atlas tokens (eeg-egitim / goz-takibi) */
+  --ink:#040c19; --ink-2:#081628; --ink-3:#0c1f38; --line-2:#24466c;
+  --bg:var(--ink); --surface:rgba(12,31,56,.62); --sunk:var(--ink-2); --line:#1a3453;
+  --fg:#e8f2fb; --muted:#9fb6cd; --dim:#6a87a6;
+  --navy:#0b386e; --blue:#3b95e6; --teal:#27b4b0; --mint:#6ed3d1; --gold:#ffc24a;
+  --accent:var(--mint); --accent-ink:var(--ink); --readout:var(--ink-3); --readout-fg:var(--fg); --readout-muted:var(--muted);
+  --warn:var(--gold); --logo-light:none; --logo-dark:block;
+  --f-display:"Unbounded",system-ui,sans-serif;
+  --f-body:"Instrument Sans",system-ui,sans-serif;
+  --f-num:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
 }
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#071a2e; --surface:#0d2540; --sunk:#0a2036; --line:#1e3d5e;
-  --fg:#e3eef8; --muted:#93abc4;
-  --accent:#4aa8ec; --accent-ink:#04182b; --readout:#0f3a66; --readout-fg:#ffffff; --readout-muted:#9cc3e6;
-  --teal:#45c9c4; --warn:#f0a446; --logo-light:none; --logo-dark:block; color-scheme:dark }}
-:root[data-theme="dark"]{
-  --bg:#071a2e; --surface:#0d2540; --sunk:#0a2036; --line:#1e3d5e;
-  --fg:#e3eef8; --muted:#93abc4;
-  --accent:#4aa8ec; --accent-ink:#04182b; --readout:#0f3a66; --readout-fg:#ffffff; --readout-muted:#9cc3e6;
-  --teal:#45c9c4; --warn:#f0a446; --logo-light:none; --logo-dark:block; color-scheme:dark }
 *{box-sizing:border-box}
 [hidden]{display:none!important}
-body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:16px;line-height:1.5}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:16px;line-height:1.55;background-image:radial-gradient(1100px 560px at 85% -10%,rgba(59,149,230,.16),transparent 60%),radial-gradient(800px 480px at 0% 35%,rgba(110,211,209,.07),transparent 60%);background-attachment:fixed}
 .wrap{max-width:1080px;margin:0 auto;padding-inline:20px;padding-block:28px 48px}
 header.top{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:24px}
-.eyebrow{font-family:var(--f-display);font-weight:600;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--teal)}
-h1{font-family:var(--f-display);font-weight:700;font-size:clamp(1.6rem,3.6vw,2.3rem);line-height:1.15;margin:.2rem 0 .3rem;text-wrap:balance}
+.eyebrow{font-family:var(--f-num);font-weight:600;font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mint)}
+h1{font-family:var(--f-display);font-weight:600;letter-spacing:-.01em;font-size:clamp(1.6rem,3.6vw,2.3rem);line-height:1.15;margin:.2rem 0 .3rem;text-wrap:balance}
 .lede{color:var(--muted);max-width:62ch;margin:0}
 .lang{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;background:var(--surface)}
-.lang button{font:600 .85rem var(--f-display);border:0;background:transparent;color:var(--muted);padding:.4rem .9rem;cursor:pointer}
+.lang button{font:600 .8rem var(--f-num);letter-spacing:.08em;min-height:36px;border:0;background:transparent;color:var(--muted);padding:.4rem .9rem;cursor:pointer}
 .lang button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
 .grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:20px;align-items:start}
 @media (max-width:700px){.grid{grid-template-columns:1fr}}
-.panel{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:18px;min-width:0}
+.panel{background:var(--surface);backdrop-filter:blur(6px);border:1px solid var(--line);border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:18px;min-width:0}
 .step{display:flex;flex-direction:column;gap:10px}
-.step h2{font-family:var(--f-display);font-weight:600;font-size:1rem;margin:0;display:flex;align-items:center;gap:.5rem}
+.step h2{font-family:var(--f-display);font-weight:600;font-size:.95rem;margin:0;display:flex;align-items:center;gap:.5rem}
 .step h2 .n{display:inline-grid;place-items:center;width:1.5rem;height:1.5rem;border-radius:50%;background:var(--sunk);color:var(--accent);font:600 .78rem var(--f-num)}
 .seg{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
 .seg button{font:600 .9rem var(--f-body);text-align:left;padding:.65rem .8rem;border:1px solid var(--line);border-radius:10px;background:var(--sunk);color:var(--fg);cursor:pointer;line-height:1.25}
@@ -70,10 +62,10 @@ input:focus-visible,select:focus-visible,button:focus-visible{outline:2px solid 
 .hint{font-size:.82rem;color:var(--muted);margin:0}
 .warn{color:var(--warn);font-size:.85rem;margin:0}
 /* readout */
-.readout{background:var(--readout);color:var(--readout-fg);border-radius:14px;padding:22px;display:flex;flex-direction:column;gap:16px;position:sticky;top:calc(env(safe-area-inset-top,0px) + 12px);min-width:0}
-.readout .lbl{font:600 .75rem var(--f-display);letter-spacing:.08em;text-transform:uppercase;color:var(--readout-muted)}
+.readout{background:linear-gradient(180deg,var(--ink-3),var(--ink-2));color:var(--readout-fg);border:1px solid var(--line-2);border-top:3px solid var(--mint);border-radius:14px;padding:22px;display:flex;flex-direction:column;gap:16px;position:sticky;top:calc(env(safe-area-inset-top,0px) + 12px);min-width:0}
+.readout .lbl{font:600 .72rem var(--f-num);letter-spacing:.08em;text-transform:uppercase;color:var(--readout-muted)}
 .big{display:flex;align-items:baseline;gap:.5rem;flex-wrap:wrap}
-.big .num{font:600 clamp(3rem,8vw,4.4rem)/1 var(--f-num);font-variant-numeric:tabular-nums}
+.big .num{font:600 clamp(3rem,8vw,4.4rem)/1 var(--f-display);color:var(--mint);font-variant-numeric:tabular-nums}
 .big .unit{font-size:1rem;color:var(--readout-muted)}
 .kv{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px}
 .kv div{background:rgba(255,255,255,.07);border-radius:10px;padding:.6rem .75rem}
@@ -81,11 +73,11 @@ input:focus-visible,select:focus-visible,button:focus-visible{outline:2px solid 
 .kv b{font:600 1.35rem var(--f-num);font-variant-numeric:tabular-nums}
 .chart{width:100%;height:auto;display:block}
 .report{background:rgba(255,255,255,.07);border-radius:10px;padding:.8rem .9rem;font-size:.92rem;line-height:1.5}
-.copy{align-self:flex-start;font:600 .85rem var(--f-display);border:1px solid rgba(255,255,255,.35);background:transparent;color:var(--readout-fg);border-radius:8px;padding:.45rem .9rem;cursor:pointer}
+.copy{align-self:flex-start;font:600 .82rem var(--f-num);border:1px solid var(--mint);color:var(--mint)!important;background:transparent;color:var(--readout-fg);border-radius:8px;padding:.45rem .9rem;cursor:pointer}
 .copy:hover{background:rgba(255,255,255,.1)}
 .notes{margin-top:28px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
 .notes section{min-width:0}
-.notes h3{font-family:var(--f-display);font-size:1rem;margin:0 0 .4rem}
+.notes h3{font-family:var(--f-display);font-weight:600;font-size:.95rem;margin:0 0 .4rem}
 .notes p,.notes li{color:var(--muted);font-size:.92rem;margin:.2rem 0}
 .notes ul{padding-left:1.1rem;margin:0}
 .formula{font-family:var(--f-num);font-size:.9rem;background:var(--sunk);border-radius:8px;padding:.5rem .7rem;color:var(--fg);overflow-x:auto}
@@ -97,7 +89,7 @@ input:focus-visible,select:focus-visible,button:focus-visible{outline:2px solid 
 .credits{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:6px}
 .credits b{color:var(--fg);font-weight:600}
 footer{margin-top:28px;padding-top:16px;border-top:1px solid var(--line);font-size:.85rem;color:var(--muted)}
-footer a{color:var(--accent)}
+footer a{color:var(--mint)}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 </style>
 <style>html{color-scheme:light}body{margin:0}img{max-width:100%}</style>
@@ -470,13 +462,13 @@ function drawChart(res,o){
   const path=pts.map((q,i)=>(i?"L":"M")+x(q[0]).toFixed(1)+" "+y(q[1]).toFixed(1)).join(" ");
   const area=path+` L${x(pts[pts.length-1][0]).toFixed(1)} ${y(0)} L${x(pts[0][0]).toFixed(1)} ${y(0)} Z`;
   const pw=res.kind==="detect"?o.p:o.p; const tx=x(target), ty=y(pw);
-  let g=""; [0,0.5,0.8,1].forEach(v=>{g+=`<line x1="${L}" x2="${W-R}" y1="${y(v)}" y2="${y(v)}" stroke="rgba(255,255,255,.12)"/><text x="${L-6}" y="${y(v)+4}" text-anchor="end" font-size="10" style="fill:var(--readout-muted)" font-family="IBM Plex Mono,monospace">${Math.round(v*100)}</text>`;});
-  const xt=[0,Math.round(nMax/2),nMax].map(n=>`<text x="${x(n)}" y="${H-B+16}" text-anchor="middle" font-size="10" style="fill:var(--readout-muted)" font-family="IBM Plex Mono,monospace">${n}</text>`).join("");
+  let g=""; [0,0.5,0.8,1].forEach(v=>{g+=`<line x1="${L}" x2="${W-R}" y1="${y(v)}" y2="${y(v)}" stroke="rgba(255,255,255,.12)"/><text x="${L-6}" y="${y(v)+4}" text-anchor="end" font-size="10" style="fill:var(--readout-muted)" font-family="JetBrains Mono,monospace">${Math.round(v*100)}</text>`;});
+  const xt=[0,Math.round(nMax/2),nMax].map(n=>`<text x="${x(n)}" y="${H-B+16}" text-anchor="middle" font-size="10" style="fill:var(--readout-muted)" font-family="JetBrains Mono,monospace">${n}</text>`).join("");
   svg.innerHTML=`${g}<path d="${area}" fill="rgba(110,211,209,.18)"/><path d="${path}" fill="none" stroke="#6ed3d1" stroke-width="2.2"/>
    <line x1="${tx}" x2="${tx}" y1="${ty}" y2="${y(0)}" stroke="rgba(255,255,255,.45)" stroke-dasharray="3 3"/>
    <circle cx="${tx}" cy="${ty}" r="4.5" fill="#ffffff"/>${xt}
-   <text x="${(L+W-R)/2}" y="${H-4}" text-anchor="middle" font-size="10" style="fill:var(--readout-muted)" font-family="Source Sans 3,sans-serif">${res.kind==="paired"?t.people:t.chartX}</text>
-   <text x="${L-6}" y="10" text-anchor="end" font-size="10" style="fill:var(--readout-muted)" font-family="Source Sans 3,sans-serif">${t.chartY} %</text>`;
+   <text x="${(L+W-R)/2}" y="${H-4}" text-anchor="middle" font-size="10" style="fill:var(--readout-muted)" font-family="Instrument Sans,sans-serif">${res.kind==="paired"?t.people:t.chartX}</text>
+   <text x="2" y="10" text-anchor="start" font-size="10" style="fill:var(--readout-muted)" font-family="Instrument Sans,sans-serif">${t.chartY} %</text>`;
   svg.setAttribute("aria-label",`${t.chartY} / ${t.chartX}`);
 }
 
