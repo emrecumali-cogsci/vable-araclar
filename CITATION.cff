@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "Bu araçları kullanırsanız lütfen aşağıdaki şekilde atıf yapın. / If you use these tools, please cite them as below."
+title: "V-Able Web Araçları: EEG Atlası, Göz Takibi Atlası, Pilot EEG Kaydı ve Örneklem Büyüklüğü Hesaplayıcı"
+type: software
+authors:
+  - family-names: "Cumalı"
+    given-names: "Emre"
+    affiliation: "V-Able Bilişsel Bilimler Laboratuvarı, Recep Tayyip Erdoğan Üniversitesi"
+repository-code: "https://github.com/emrecumali-cogsci/vable-araclar"
+url: "https://vable.erdogan.edu.tr"
+license: MIT
+version: "1.0.0"
+date-released: "2026-11-07"
+keywords:
+  - EEG
+  - eye tracking
+  - neuroscience education
+  - sample size
+  - special education
