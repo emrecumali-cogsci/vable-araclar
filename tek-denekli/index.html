@@ -916,7 +916,7 @@ function renderTables(R, o) {
   if (design === "mb") {
     if (R.bc) {
       const b = R.bc;
-      $("bc-cards").innerHTML = `<div class="card"><div class="lbl">${t("bc_g")}</div><div class="big">${fmt(b.Est, 2)}</div><div class="sub">SE ${fmt(b.SE, 2)} · %${Math.round(o.conf * 100)} ${t("bc_ci")} [${fmt(b.CI_lower, 2)}, ${fmt(b.CI_upper, 2)}]</div></div>
+      $("bc-cards").innerHTML = `<div class="card"><div class="lbl">${t("bc_g")}</div><div class="big">${fmt(b.Est, 2)}</div><div class="sub">SE ${fmt(b.SE, 2)} · ${lang === "tr" ? "%" + Math.round(o.conf * 100) : Math.round(o.conf * 100) + "%"} ${t("bc_ci")} [${fmt(b.CI_lower, 2)}, ${fmt(b.CI_upper, 2)}]</div></div>
         <div class="card"><div class="lbl">${t("bc_df")}</div><div class="big">${fmt(b.nu, 1)}</div><div class="sub">J = ${fmt(b.J, 3)}</div></div>
         <div class="card"><div class="lbl">${t("bc_rho")}</div><div class="big">${fmt(b.rho, 2, true)}</div><div class="sub">τ² = ${fmt(b.tau2, 2)} · σ² = ${fmt(b.sigma2, 2)}</div></div>
         <div class="card"><div class="lbl">${t("bc_phi")}</div><div class="big">${fmt(b.phi, 2, true)}</div><div class="sub">b₁ = ${fmt(b.beta[1], 2)}</div></div>`;
