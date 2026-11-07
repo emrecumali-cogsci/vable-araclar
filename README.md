@@ -13,9 +13,9 @@ Interactive learning and research tools of the V-Able Cognitive Science Lab (Rec
 
 ## Nasıl atıf yapılır / How to cite
 
-Cumalı, E. (2026). *V-Able Web Araçları* (Sürüm 1.0.0) [Yazılım]. V-Able Bilişsel Bilimler Laboratuvarı, Recep Tayyip Erdoğan Üniversitesi. https://github.com/emrecumali-cogsci/vable-araclar
+Cumalı, E. (2026). *V-Able Web Araçları* (Sürüm 1.0.0) [Yazılım]. V-Able Bilişsel Bilimler Laboratuvarı, Recep Tayyip Erdoğan Üniversitesi. https://doi.org/10.5281/zenodo.24041804
 
-Zenodo DOI eklendiğinde bu bölüm güncellenecektir. / This section will be updated with the Zenodo DOI.
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24041804.svg)](https://doi.org/10.5281/zenodo.24041804)
 
 ## Lisans / License
 
