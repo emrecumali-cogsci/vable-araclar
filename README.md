@@ -11,6 +11,7 @@ Interactive learning and research tools of the V-Able Cognitive Science Lab (Rec
 | Pilot EEG Kaydı / Pilot EEG Recording | https://emrecumali-cogsci.github.io/vable-araclar/eeg-pilot/ |
 | Örneklem Büyüklüğü Hesaplayıcı / Sample Size Calculator | https://emrecumali-cogsci.github.io/vable-araclar/orneklem/ |
 | Tek Denekli Araştırma Analiz Aracı / Single-Case Design Analyzer | https://emrecumali-cogsci.github.io/vable-araclar/tek-denekli/ |
+| LSL Yöntem Merkezi / LSL Methods Hub | https://emrecumali-cogsci.github.io/vable-araclar/lsl/ |
 
 ## Nasıl atıf yapılır / How to cite
 
